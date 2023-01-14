@@ -1,4 +1,4 @@
-const casas = document.querySelectorAll(".content-casa")
+const casas = Array.from(document.querySelectorAll(".content-casa"))
 
 const indicesDeVitoria = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // linhas 
@@ -8,7 +8,7 @@ const indicesDeVitoria = [
 
 const completouCasas = (casasMarcadas) => {
     const indicesCasasMarcadas = casasMarcadas
-                                .map(casa => Array.from(casas).indexOf(casa))
+                                .map(casa => casas.indexOf(casa))
                                 .reduce((set, e) => set.add(e), new Set())
     for(let sequencia of indicesDeVitoria){
         const [a, b, c] = sequencia
@@ -43,8 +43,7 @@ const deuVelha = () => {
 }
 
 const adversarioMarcar = () => {
-    const casasLivres = Array.from(casas)
-                        .filter(isCasaLivre)
+    const casasLivres = casas.filter(isCasaLivre)
     if(acabou(casasLivres)){
         deuVelha()   
     }
@@ -55,7 +54,7 @@ const adversarioMarcar = () => {
 }
 
 const venceuQuem = (marca) => {
-    const marcados = Array.from(casas).filter(marca)
+    const marcados = casas.filter(marca)
     return completouCasas(marcados)
 }
 
@@ -71,7 +70,7 @@ const derrota = () => {
     location.reload()
 }
 
-const adversarioComeca = (Math.floor(Math.random() * 100) % 2) === 0 
+const adversarioComeca = (Math.floor(Math.random() * 10) % 2) === 0 
 
 if(adversarioComeca){
     adversarioMarcar()
