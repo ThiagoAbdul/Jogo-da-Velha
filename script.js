@@ -71,41 +71,16 @@ const derrota = () => {
     location.reload()
 }
 
-const isPar = () => (Math.floor(Math.random * 10)) % 2 === 0 
+const adversarioComeca = (Math.floor(Math.random() * 100) % 2) === 0 
 
-const voceJogaPrimeiro = (casaSelecionada) => {
-    marcarX(casaSelecionada)
-    if(voceVenceu()){
-        vitoria()
-    }
-    else{
-        adversarioMarcar()
-        if(adversarioVenceu()){
-            derrota()
-        }
-    }
-}
-
-const adversarioJogaPrimerio = (casaSelecionada) => {
+if(adversarioComeca){
     adversarioMarcar()
-    if(adversarioVenceu()){
-        derrota()
-    }
-    else{
-        marcarX(casaSelecionada)
-        if(voceVenceu()){
-            vitoria()
-        }
-    }
 }
-
-const voceComeca = isPar()
-
-const primeiraRodada = voceComeca? voceJogaPrimeiro : adversarioJogaPrimerio
 
 casas.forEach(casa => {
     casa.addEventListener('click', event => {
         const casaSelecionada = event.target
+        
         marcarX(casaSelecionada)
         if(voceVenceu()){
             vitoria()
